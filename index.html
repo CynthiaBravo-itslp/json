@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+     <title>Maps</title>
+    
+  <script type="text/javascript">  
+        var cadena='{"TipoAuto":"Sedan","Modelo":"2004","Color":"Negro","Marca":"Kia"}'
+        var objetjs = JSON.parse(cadena)
+        console.log(objetjs.TipoAuto + objetjs.Moddelo + objetjs.Color + objetjs.Marca)     
+        var sep = "-------------------------"
+        console.log(sep)
+        var objetsj = {TipoAuto:"Sedan",Modelo:"2012",Color:"Gris",Marca:"Audi"}
+        console.log(objetjs)
+        var msjnjson = JSON.stringify(objetsj)
+        console.log(sep)
+        console.log(msjnjson)
+        console.log(sep)
+        var arreglo = ["lunes", "Martes","Miercoles"]
+        var msarreglo = JSON.stringify(arreglo)
+        console.log(msarreglo)
+   </script>>
+    
+   <style>
+      .contenedor {
+          display: flex;
+       justify-content: center;
+       align-items: center;
+      }
+      #map {
+        height: 100%;
+      }
+     
+       html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    
+</head>
+
+<body>
+      <div class="contenedor">
+      <h2>Se muestran dos funciones utilizadas en JSON, 1.JSON.parse() y 2.JSON.stringify().</h2></div>
+      <div class="contenedor">   <h4>1.JSON.parse: convierte JSON en texto a JavaScript</h4>
+      </div>
+      <div class="contenedor">
+      <textarea id="jsonatext" name="jsonatext" rows="10" cols="60">{"TipoAuto":"Sedan","Modelo":"2004","Color":"Negro","Marca":"Kia"}</textarea>
+  
+      <button type="button" id="boton" onClick="ejecutar()">convertir</button>
+          
+     <script>
+         
+         function ejecutar(){
+             var jsonaText = document.getElementById("jsonatext").value;
+             var msjnjson = JSON.parse(jsonaText)
+             var texto = msjnjson.TipoAuto + "\n" + msjnjson.Modelo + "\n"+ msjnjson.Color + "\n"+ msjnjson.Marca
+             document.getElementById("textoconv").innerHTML = texto
+         }
+         
+         function mostrarmapa() {
+             var x = document.getElementById("map");
+             if (x.style.display === "none") {
+             x.style.display = "block";
+              }
+             else {
+             x.style.display = "none";
+    }
+}
+    </script>
+          
+        <textarea id="textoconv" rows="10" cols="60"></textarea>
+        </div>
+        <div class="contenedor">
+        <h4>2.JSON.stringify: convierte texto en JavaScript a JSON</h4>
+       </div>
+       <div class="contenedor">
+      <textarea id="textjson" name="textjson" rows="10" cols="60">"{TipoAuto:"Sedan",Modelo:"2012",Color:"Gris",Marca:"Audi"}"</textarea>
+  
+    <button type="button" id="boton2" onClick="ejecutar2()">convertir</button>
+     <script>
+         function ejecutar2(){
+             //var arreglo = document.getElementById("textjson").value;
+            // console.log(arreglo)
+            var objetsj1 = document.getElementById("textjson").value;
+
+            var msjnjson1 = JSON.stringify(objetsj1)
+             //var msjntext = JSON.stringify(arreglo)
+             var texto2 = msjnjson1
+             document.getElementById("textoconv2").innerHTML = msjnjson
+         }
+     </script>
+       <textarea id="textoconv2" rows="10" cols="60"></textarea>
+       
+    </div>
+    <div class="contenedor">
+    <h4>Presiona el Boton para mandar llamar la API de google maps</h4></div>
+    <div class="contenedor"><br>
+    <button onclick="mostrarmapa()">Mostrar Mapa</button>
+    </div><br><br>
+    
+    <div id ="map" style="display:none"> </div> 
+    
+    //api
+     <script  async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCKiIqCdZGrVxx06LSbe7uG3zXOq1Cz5k&callback=initMap">
+    </script>
+        
+	<script>
+		
+      var map;
+  	 function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+		  center: {lat: 22.1204644767717, lng: -100.81636473014869},
+          zoom: 13,
+        });
+        var marker = new google.maps.Marker({
+          position: {lat: 22.1204644767717, lng: -100.81636473014869},
+          map: map,
+	  title: 'SIIX EMS México'
+        });
+         }
+   
+	</script>
+</body>
+</html>
